@@ -10,6 +10,7 @@ func main() {
 	color := ""
 	substring := ""
 	input := ""
+	bannerfile := "./banners/standard.txt"
 	var plainargs []string
 
 	if len(os.Args) < 2 {
@@ -20,6 +21,8 @@ func main() {
 	for _, args := range os.Args[1:] {
 		if strings.HasPrefix(args, "--color=") {
 			color = strings.Split(args, "=")[1]
+		} else if args == "standard" || args == "shadow" || args == "thinkertoy" {
+			bannerfile = fmt.Sprintf("./banners/%s.txt", args)
 		} else {
 			plainargs = append(plainargs, args)
 		}
@@ -34,15 +37,13 @@ func main() {
 		fmt.Println("enter valid input")
 	}
 
-	banners := "standard.txt"
-
-	bannerfile, err := LoadBanner(banners)
+	banners, err := LoadBanner(bannerfile)
 	if err != nil {
 		fmt.Println("error loading bannerfile")
 		return
 	}
 
-	output := BuildArt(input, substring, color, bannerfile)
+	output := BuildArt(input, substring, color, banners)
 
 	fmt.Println(output)
 
