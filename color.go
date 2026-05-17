@@ -12,6 +12,7 @@ func Colorize(text, color string) string {
 		"blue":    "\033[34m",
 		"cyan":    "\033[36m",
 		"magenta": "\033[35m",
+		"orange":  "\033[38;5;208m",
 	}
 
 	colorcode, ok := colors[color]
