@@ -14,19 +14,19 @@ func RenderLine(input, substring, color string, banner map[rune][]string) []stri
 	var ranges []Range
 	start := 0
 
-	for {
-		idx := strings.Index(input[start:], substring)
-		if idx == -1 {
-			break
-		}
-		allthestart := start + idx
-		full := allthestart + len(substring)
-		ranges = append(ranges, Range{allthestart, full})
-		start = allthestart + len(substring)
-	}
-
 	if substring == "" { //no substring color everything
 		ranges = []Range{{0, len(input)}}
+	} else {
+		for {
+			idx := strings.Index(input[start:], substring)
+			if idx == -1 {
+				break
+			}
+			allthestart := start + idx
+			full := allthestart + len(substring)
+			ranges = append(ranges, Range{allthestart, full})
+			start = allthestart + len(substring)
+		}
 	}
 
 	if len(ranges) == 0 { //substring not found color nothing
