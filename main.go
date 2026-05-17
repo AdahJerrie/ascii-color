@@ -28,6 +28,12 @@ func main() {
 		}
 	}
 
+	if color == "" {
+		fmt.Println("Usage: go run . [OPTION] [STRING]")
+		fmt.Println("EX: go run . --color=<color> <substring to be colored> something ")
+		return
+	}
+
 	if len(plainargs) == 1 {
 		input = plainargs[0]
 	} else if len(plainargs) == 2 {
